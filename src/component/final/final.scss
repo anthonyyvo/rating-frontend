@@ -1,0 +1,31 @@
+@import '../../styles/index.scss';
+
+.final {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .thank {
+        font-size: 30px;
+        font-weight: 600;
+        flex: 1;
+        padding: 20px 10px;
+        color: $color1;
+
+    }
+    .rateGoogle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        .title {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        img {
+            width: 150px;
+            height: auto;
+        }
+    }
+}

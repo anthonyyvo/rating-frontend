@@ -1,0 +1,39 @@
+@import '../../styles/index.scss';
+ 
+.question {
+    color: $gray1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    .header  {
+        flex: 1;
+        margin: 10px;
+        padding-top: 20px;
+
+        h2 {
+            font-size: 24px;
+            font-weight: 500;
+        }
+        padding-bottom: 20px;
+        @include breakpoint($sm) {
+            padding-bottom: 20px;
+        }
+    }
+    .body {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 20px;
+        #answerText {
+            width: 90%;
+            height: 80%;
+            background-color: rgb(233, 235, 237);
+            border-radius: 5px;
+            padding: 10px;
+            font: 1em sans-serif;
+           
+        }
+    }
+}
