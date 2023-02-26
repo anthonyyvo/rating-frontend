@@ -17,11 +17,14 @@
     .rateGoogle {
         display: flex;
         flex-direction: column;
+        justify-content: start;
         align-items: center;
+        align-content: space-between;
         padding: 10px;
         .title {
             font-size: 18px;
             font-weight: 500;
+            margin-bottom: 10px;
         }
         img {
             width: 150px;
