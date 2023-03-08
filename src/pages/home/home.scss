@@ -28,4 +28,35 @@
             }
         }
     }
+    .locationMenu {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        display: flex;
+        .dropWrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            span {
+                visibility: hidden;
+                display: none;
+                cursor: pointer;
+                &:hover {
+                    background-color: beige;
+                }
+                &.active {
+                    visibility:visible;
+                    display: block;
+
+                }
+            }
+        }
+        &.show span {
+            visibility:visible;
+            display: block;
+
+        }
+    }
+
 }

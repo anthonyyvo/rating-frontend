@@ -24,12 +24,25 @@
     .bottom {
         flex: 1;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         min-height: 100px;
         align-items: center;
         .title {
             font-size: 25px;
             font-weight: 500;
+        }
+        .afterSend {
+            p {
+                color: #f55f23;
+                margin-bottom: 10px;
+            }
+            button {
+                padding: 5px 10px;
+                cursor: pointer;
+                background-color: $color1;
+                border-radius: 3px;
+            }
         }
     }
 

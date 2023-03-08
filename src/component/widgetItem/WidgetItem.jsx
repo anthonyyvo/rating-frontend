@@ -25,7 +25,12 @@ function WidgetItem({handlePosition, position , current, child, haveButton=true}
     <div className='footer'>
     {
         haveButton && (
-            <button className='nextButton' onClick={(e)=> {handlePosition(position)}}>{
+            <button className='nextButton' onClick={(e)=> {
+                if (position === 3) {
+                    console.log('send data')
+                }
+                handlePosition(position)
+                }}>{
         langs.lang==="eng" && "NEXT"
     }
     {

@@ -1,5 +1,5 @@
 export const INITIAL_STATE = {
-    lang: "eng"
+    lang: "vi"
 };
 export const langContextReducer = (langs, action) => {
     switch (action.type) {

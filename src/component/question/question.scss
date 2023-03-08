@@ -16,7 +16,7 @@
             font-size: 24px;
             font-weight: 500;
         }
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         @include breakpoint($sm) {
             padding-bottom: 20px;
         }
@@ -24,7 +24,10 @@
     .body {
         flex: 1;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+
         padding-bottom: 20px;
         #answerText {
             width: 90%;
@@ -34,6 +37,24 @@
             padding: 10px;
             font: 1em sans-serif;
            
+        }
+        .checkBoxWrap {
+            display: flex;
+            justify-content: start;
+            width: 90%;
+            padding-bottom: 20px;
+
+            // background-color: rgb(134, 119, 158);
+            flex-wrap: wrap;
+            .checkItem {
+                // background-color: aqua;
+                width: 200px;
+                padding: 10px 0;
+                // height: 30px;
+                input {
+                    margin-right: 5px;;
+                }
+            }
         }
     }
 }

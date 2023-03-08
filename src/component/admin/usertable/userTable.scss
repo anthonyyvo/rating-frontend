@@ -1,0 +1,21 @@
+.cellAction {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.viewButton {
+    background-color: rgb(12, 133, 44);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    width: 30px;
+    cursor: pointer;
+}
+.deleteButton {
+    background-color: rgb(196, 140, 17);
+    color: white;
+    padding: 5px;
+    width: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}

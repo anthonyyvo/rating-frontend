@@ -1,0 +1,47 @@
+.adminWidget {
+    margin-right: 29px;
+    display: flex;
+    padding: 10px;
+    flex: 1;
+    justify-content: space-between;
+    -webkit-box-shadow: 2px 4px 10px 1px #B9B9B9; 
+box-shadow: 2px 4px 10px 1px #B9B9B9;
+border-radius: 10px;
+height: 100px;
+
+
+    .left, .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #999
+        }
+        .counter {
+            font-size: 24px;
+            font-weight: normal;
+            color: gray;
+        }
+        .positive {
+            color: green;
+        }
+        .negative {
+            color: red;
+
+        }
+        .link {
+            width: max-content;
+            font-size: 12px;
+            text-decoration: underline;
+            cursor: pointer;
+            color: #999;
+        }
+        .icon {
+            align-self: flex-end;
+            border-radius: 5px;
+            padding: 3px;
+        }
+    }
+}

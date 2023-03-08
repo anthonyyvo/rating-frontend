@@ -1,0 +1,81 @@
+@import '../../../styles/index.scss';
+
+.single {
+    display: flex;
+}
+
+.singleContainer {
+    // background-color: aqua;
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+
+    .singleRating {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        .title {
+            color:#3f3e3e;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .ratingItem {
+            margin-right: 29px;
+            margin-top: 50px;
+            width: 60%;
+            display: flex;
+            padding: 10px;
+            flex: 1;
+            justify-content: space-between;
+            background-color: rgb(222, 228, 220);
+            -webkit-box-shadow: 2px 4px 10px 1px #B9B9B9;
+            box-shadow: 2px 4px 10px 1px #B9B9B9;
+            border-radius: 10px;
+            height: 100px;
+            .dataList {
+                list-style: none;
+                li {
+                    padding: 5px;
+                    display: flex;
+                    justify-content: end;
+
+                    input {
+                        padding: 3px;
+                        width: 300px;
+                        border: solid 1px #fff;
+                        outline: none;
+                        &:focus {
+                            box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(39 195 187 / 60%) !important;
+                            border-color: rgba(39, 195, 187, 0.8) !important;
+                        }
+                    }
+                }
+                .itemTitle {
+                    font-size: 15px;
+                    font-weight: bold;
+                    margin-right: 10px;
+                }
+                .itemContent {
+                    width: 300px;
+                }
+            }
+        }
+        .updateRating {
+            position: absolute;
+            top: 0;
+            right: 30px;
+            .updateButton {
+                background-color: $color1;
+                padding: 10px 25px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        }
+    }
+
+
+}
