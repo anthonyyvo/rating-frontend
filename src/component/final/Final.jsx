@@ -34,7 +34,9 @@ useEffect(()=> {
             <img src={state.location === 1 ? qrd1 : qrd7} />
         </div>
         ) : undefined }
-        
+        <button onClick={()=> {
+            window.location.replace(process.env.REACT_APP_SITE_URL);
+        }} className='ratingAgain'>Start Again</button>
     </div>
   )
 }

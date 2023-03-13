@@ -29,7 +29,6 @@ function Question({ position, handlePosition }) {
       setJobsTitle(jobs)
     }
     dispatch({type: 'POSITION', payload: checked});
-    console.log(checked);
   }, [checked, langs])
   return (
     <div className='question'>

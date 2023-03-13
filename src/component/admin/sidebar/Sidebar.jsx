@@ -15,17 +15,19 @@ import { LoginContext } from '../../../context/loginContext/Context';
 
 const Sidebar = () => {
     const navigate = useNavigate();
-    const {dispatch} = useContext(LoginContext);
+    const { dispatch } = useContext(LoginContext);
     const handleLogOut = () => {
-        dispatch({type: "LOG_OUT"});
+        dispatch({ type: "LOG_OUT" });
         navigate('/login')
-      }
+    }
     return (
         <div className='sidebar'>
             <div className='top'>
-                <div className='logo'>
-                    CSKH EDEN
-                </div>
+                <Link to={"/admin"} >
+                    <div className='logo'>
+                        CSKH EDEN
+                    </div>
+                </Link>
             </div>
             <div className='center'>
                 <ul>
@@ -64,15 +66,18 @@ const Sidebar = () => {
                     <p className='title'>USER</p>
 
                     <li>
-                        <AccountCircleIcon className='icon' />
-                        <span>Profile</span>
+                        <Link to="/admin/profile">
+                            <AccountCircleIcon className='icon' />
+                            <span>Profile</span>
+                        </Link>
+
                     </li>
                     <li>
                         <SettingsIcon className='icon' />
                         <span>Setting</span>
                     </li>
-                    <li onClick={()=> {handleLogOut()}}>
-                        <LogoutIcon  className='icon' />
+                    <li onClick={() => { handleLogOut() }}>
+                        <LogoutIcon className='icon' />
                         <span>Logout</span>
                     </li>
 

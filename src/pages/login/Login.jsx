@@ -20,7 +20,8 @@ function Login() {
 
         setIsSpinner(true);
         try {
-            const res =  await axios.post("http://localhost:5000/api/auth/login", {
+            console.log(process.env.REACT_APP_SERVER);
+            const res =  await axios.post(`${process.env.REACT_APP_SERVER}/auth/login`, {
                 username: userRef.current.value,
                 password: passwordRef.current.value,
 
@@ -30,7 +31,7 @@ function Login() {
             dispatch({type: "LOGIN_SUCCESS", payload: res.data});
             console.log(isLoading);
             setIsSpinner(false);
-            // window.location.replace("/");
+            window.location.replace(process.env.REACT_APP_SITE_URL);
         }   catch (err) {
             dispatch({type: "LOGIN_FAILURE"});
             setIsSpinner(false);

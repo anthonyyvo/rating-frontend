@@ -13,17 +13,18 @@
        padding: 20px;
        gap: 20px
     }
-    .listContainer {
+    .chartContainer {
        -webkit-box-shadow: 2px 4px 10px 1px #B9B9B9; 
      box-shadow: 2px 4px 10px 1px #B9B9B9;
      border-radius: 10px;
+     margin: 10px;
      padding: 10px;
-     .listTitle {
-       font-size: 20px;
-       font-weight: 500;
-       color: gray;
-       margin-bottom: 10px;
+     display: flex;
+     flex-wrap: wrap;
+     .chartBox {
+      // height: 300px;
      }
+
     }
  }
  

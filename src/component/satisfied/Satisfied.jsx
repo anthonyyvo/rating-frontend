@@ -21,7 +21,6 @@ function Satisfied({position, handlePosition}) {
         } else {
             setScore(i);
             handlePosition(position);
-            console.log('handle')
             dispatch({
                 type: DataContextActions.SATISFIED,
                 payload: i

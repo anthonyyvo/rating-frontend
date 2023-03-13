@@ -1,34 +1,69 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './widget.scss';
 import PeopleIcon from '@mui/icons-material/People';
 
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'; 
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 const Widget = ({type}) => {
-  let data;
+  const [data, setData] = useState();
 
-  switch (type) {
-    case "user":
-      data = {
-        title: "USERS",
-        isMoney: false,
-        link: "See all users",
-        icon: <PeopleIcon className='icon' style={{
-          backgroundColor: "rgba(0, 128,0, 0.2)",
-          color: 'green'
-
-        }}/>
-      };
-    break;
-    default:
-    break;
-  }
+  useEffect(() => {
+    let urlRes = `${process.env.REACT_APP_SERVER}/rating?day=7`
+    axios.get(urlRes)
+    .then(res => {
+      switch (type) {
+        case "location-1":
+          const data1 = res.data.reduce((acc, c, i) => {
+            if (c.location === 1) {
+              acc.push(c);
+            };
+            return acc
+          }, [])
+          setData({
+            title: "RATING EDEN D1 THIS WEEK",
+            link: "See all rating",
+            href: "/admin/q1",
+            count: data1.length,
+            icon: <PeopleIcon />
+          })
+          break;
+        case "location-7":
+          const data7 = res.data.reduce((acc, c, i) => {
+            if (c.location === 7) {
+              acc.push(c);
+            };
+            return acc
+          }, [])
+          setData({
+            title: "RATING EDEN D7 THIS WEEK",
+            link: "See all rating",
+            href: "/admin/q7",
+            count: data7.length,
+            icon: <PeopleIcon />
+          })
+          break;
+        default:
+          setData({
+            title: "ALL",
+            link: "See all rating",
+            href: "/admin/list",          })
+      }
+    })
+    
+  }, [])
+  
 
   return (
     <div className='adminWidget'>
         <div className='left'>
             <span className='title'>{data?.title}</span>
-            <span className='counter'>12312</span>
-            <span className='link'>See all users</span>
+            <span className='counter'>{data?.count}</span>
+            <span className='link'>
+            <Link to={data?.href}>
+            {data?.link}
+            </Link>
+            </span>
 
         </div>
         <div className='right'>

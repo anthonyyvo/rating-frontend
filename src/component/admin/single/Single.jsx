@@ -6,8 +6,9 @@ import './single.scss';
 import axios from 'axios';
 import LoadingSpinner from '../../spinner/LoadingSpinner';
 function Single() {
-    const [name, setName] = useState('Vo minh hoai an');
+    const [name, setName] = useState('');
     const [phone, setPhone] = useState();
+    const [comments, setComments] = useState('');
     const [rating, setRating] = useState();
     let { userId } = useParams();
     const [isSpinner, setIsSpinner] = useState(false);
@@ -16,20 +17,17 @@ function Single() {
 
 
     useEffect(() => {
-        const url = "http://localhost:5000/api/rating/" + userId;
+        const url = `${process.env.REACT_APP_SERVER}/rating/` + userId;
         axios.get(url)
             .then((res) => {
                 setRating(res.data);
-                console.log(res);
                 setName(res.data.name);
                 setPhone(res.data.phone);
-
-
             })
     }, []);
     const handleUpdate = async () => {
         try {
-            const urlUpdate = "http://localhost:5000/api/rating/" + userId;
+            const urlUpdate =  process.env.REACT_APP_SERVER + "/rating/" + userId;
             setIsSpinner(true);
             const res =  await axios.put(urlUpdate, {
                 ...rating,
@@ -38,7 +36,6 @@ function Single() {
             });
             setIsSpinner(false);
             setSuccess('Update Successful')
-            console.log(res);
         } catch (err) {
 
         }
@@ -65,6 +62,10 @@ function Single() {
                                 <input placeholder='' value={phone} onChange={e=>setPhone(e.target.value)}></input>
                             </li>
                             <li>
+                                <label className='itemTitle'>Comments:</label>
+                                <input placeholder='' value={comments} onChange={e=>setComments(e.target.value)}></input>
+                            </li>
+                            <li>
                                 <span className='itemTitle'>Sastified:</span>
                                 <span className='itemContent'>{rating && rating.satisfied}</span>
                             </li>
@@ -75,6 +76,10 @@ function Single() {
                             <li>
                                 <span className='itemTitle'>Rating:</span>
                                 <span className='itemContent'>{rating && rating.rating}</span>
+                            </li>
+                            <li>
+                                <span className='itemTitle'>Feedback:</span>
+                                <span className='itemContent'>{rating && rating.answer}</span>
                             </li>
                             <li>
                                 <span className='itemTitle'>Location:</span>

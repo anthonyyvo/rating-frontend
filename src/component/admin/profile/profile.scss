@@ -1,0 +1,56 @@
+@import '../../../styles/index.scss';
+
+.profile {
+    display: flex;
+    justify-content: center;
+
+    // align-items: center;
+    .profileBox {
+        margin-top: 40px;
+        height: 400px;
+        width: 400px;
+        background-color: rgb(209, 241, 226);
+        -webkit-box-shadow: 2px 4px 10px 1px #B9B9B9; 
+box-shadow: 2px 4px 10px 1px #B9B9B9;
+border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+
+        .title {
+            color: $color1;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .profileItem {
+            // display: flex;
+            // justify-content: space-around;
+            margin: 10px 0px;
+            span {
+                display: inline-block;
+                font-weight: bold;
+                margin-right: 10px;
+            }
+            p {
+                display: inline-block;
+                font-weight: 400;
+            }
+
+            
+        }
+        .profileSubmit {
+            padding: 10px 20px;
+            background-color:  $color1;
+            color: #fff;
+            margin-top: 30px;
+            cursor: pointer;
+            border-radius: 5px;
+
+        }
+        .settingImage {
+            height: 100px;
+        }
+    }
+}

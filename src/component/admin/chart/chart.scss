@@ -1,0 +1,20 @@
+.chartWrap {
+        .chartPie {
+        height: 300px;
+        width: 300px;
+    }
+    .chartIndexTitle {
+        text-transform: uppercase;
+    }
+    .chartIndex {
+        list-style: none;
+        margin-left: 20px;
+        .colorIndex {
+            height: 10px;
+            width: 20px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+    }
+}

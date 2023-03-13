@@ -16,6 +16,7 @@ import { useContext } from "react";
 import NotFound from "./pages/notfound/NotFound";
 import Time from "./component/admin/time/Time";
 import { SendDataContextProvider } from "./context/sendDataContext/SendDataContext";
+import Profile from "./component/admin/profile/Profile";
 
 function App() {
   const {user} = useContext(LoginContext);
@@ -41,6 +42,8 @@ function App() {
               <Route path='q7' element={user ? <List location={7} /> : <Navigate to="/login" /> } />
               <Route path='q1' element={user ? <List location={1} /> : <Navigate to="/login" /> } />
               <Route path='time' element={user ? <Time /> : <Navigate to="/login" /> } />
+              <Route path='profile' element={user ? <Profile /> : <Navigate to="/login" /> } />
+
 
               <Route path="rating">
                 <Route path=':userId' element={user ? <Single /> : <Login />} />

@@ -12,7 +12,7 @@ const actionColumn =  {
         return (
             <div className='cellAction'>
                 {/* <div className='viewButton'>View</div> */}
-                <Link to={`http://localhost:3000/admin/rating/${params.row.ratingId}`} className='deleteButton'>Edit</Link>
+                <Link to={`${process.env.REACT_APP_SITE_URL}/admin/rating/${params.row.ratingId}`} className='deleteButton'>Edit</Link>
             </div> 
         )
     }
@@ -25,12 +25,13 @@ const actionColumn =  {
     
   ];
   const columns = [
-    { field: '_id', headerName: 'ID', width: 60, renderCell: (params) => {return (
+    { field: '_id', headerName: 'ID', width: 40, renderCell: (params) => {return (
         <div>
             {params.row.id}
         </div>
     )} },
-    { field: 'name', headerName: 'Full Name', width: 200 },
+    { field: 'name', headerName: 'Full Name', width: 150},
+    { field: 'phone', headerName: 'Phone', width: 100},
     {
       field: 'satisfied',
       headerName: 'Satisfied',
@@ -49,7 +50,17 @@ const actionColumn =  {
       type: 'number',
       width: 60,
     },
-    { field: 'answer', headerName: 'Comments', width: 200 }
+    { field: 'answer', headerName: 'Feedbacks', width: 150 },
+    { field: 'comments', headerName: 'Comments', width: 150 },
+
+    {field: 'date', headerName: 'Date', width: 150, renderCell: (params) => {
+      const isoDate =  new Date(params.row.createdAt);
+      const localDate =  isoDate.toLocaleDateString("en-GB");
+      const localTime =  isoDate.toLocaleTimeString();
+      return (
+        <p>{localTime} - {localDate}</p>
+      );
+    }  }
   ];
   const newColums = [
     ...columns.slice(0, 1),
@@ -61,12 +72,12 @@ const UserTable = ({location, days}) => {
   useEffect(()=> {
       let urlRes;
       if (location) {
-        urlRes = "http://localhost:5000/api/rating?location=" + location
+        urlRes = `${process.env.REACT_APP_SERVER}/rating?location=` + location
       } else if (days) {
-        urlRes = "http://localhost:5000/api/rating?days=" + days
+        urlRes = `${process.env.REACT_APP_SERVER}/rating?days=` + days
       } 
        else {
-        urlRes = "http://localhost:5000/api/rating/"
+        urlRes = `${process.env.REACT_APP_SERVER}/rating`
       }
       axios.get(urlRes)
       .then(res => {
@@ -78,7 +89,10 @@ const UserTable = ({location, days}) => {
              satisfied: current.satisfied, 
              likely: current.likely, 
              rating: current.rating,
-             ratingId: current._id
+             ratingId: current._id,
+             createdAt: current.createdAt,
+             phone: current.phone,
+             comments: current.comments
           })
           return acc;
         },[])

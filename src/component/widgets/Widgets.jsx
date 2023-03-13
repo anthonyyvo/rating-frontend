@@ -39,9 +39,8 @@ function Widgets({ length }) {
         }
     }
     useEffect(() => {
-        console.log(currentItem);
-        console.log(sendState);
-    }, [currentItem])
+
+    }, [])
 
     return (
         <div className='widgets'>

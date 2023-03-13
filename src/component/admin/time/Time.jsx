@@ -12,7 +12,6 @@ const Time = () => {
 
 
 const handelDays =  (e) => {
-  // refreshPage();
    setDays(e);
 
 }

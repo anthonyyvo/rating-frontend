@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import "./navbar.scss";
 import SearchIcon from '@mui/icons-material/Search';
 import LanguageIcon from '@mui/icons-material/Language';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Link } from 'react-router-dom';
+import { LoginContext } from '../../../context/loginContext/Context';
 
 const Navbar = () => {
+  const {user} = useContext(LoginContext);
+  const PF =  "http://localhost:5000/images/";
+
   return (
     <div className='navbar'>
       <div className='wrapper'>
@@ -23,14 +28,16 @@ const Navbar = () => {
             Settings
           </div>
           <div className='item'>
+            <Link to="/admin/profile">
             <AccountCircleIcon className='icon' />
             <div className='counter'>1</div>
-            Profile
+            {user.displayName ? user.displayName : user.username}
+            </Link>
           </div>
           <div className='item'>
             <img
               className='avatar'
-              src="https://images.theconversation.com/files/501182/original/file-20221214-14389-tahjkr.jpg?ixlib=rb-1.1.0&q=30&auto=format&w=600&h=883&fit=crop&dpr=2"
+              src={PF + user.profilePicture}
               width="30px"
               height="30px"
             />
