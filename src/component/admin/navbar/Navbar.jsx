@@ -19,10 +19,10 @@ const Navbar = () => {
           <SearchIcon className='icon' />
         </div>
         <div className='items'>
-          <div className='item'>
+          {/* <div className='item'>
             <LanguageIcon className='icon' />
             English
-          </div>
+          </div> */}
           <div className='item'>
             <SettingsIcon className='icon' />
             Settings
