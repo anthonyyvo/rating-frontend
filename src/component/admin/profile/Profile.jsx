@@ -12,8 +12,8 @@ function Profile() {
     const PF =  "http://localhost:5000/images/";
     useEffect(() => {
         console.log(user);
-
     }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updateUser = {
@@ -21,7 +21,6 @@ function Profile() {
             username: user.username,
             displayName: displayName
         };
-
         if (file) {
             const data = new FormData();
             const fileName = Date.now() + file.name;
@@ -30,7 +29,6 @@ function Profile() {
             updateUser.profilePicture = fileName;
             try {
                 await axios.post(process.env.REACT_APP_SERVER + "/upload", data);
-
             } catch (err) {
                 console.log(err)
             }
@@ -42,7 +40,6 @@ function Profile() {
         } catch (err) {            
             console.log(err)
         }
-
     }
 
     return (
@@ -82,7 +79,8 @@ function Profile() {
                         </div>
                         <button className='profileSubmit'
                             onClick={(e) => handleSubmit(e)}
-                        >Submit</button>
+                        >Submit
+                        </button>
 
                     </div>
                 </div>

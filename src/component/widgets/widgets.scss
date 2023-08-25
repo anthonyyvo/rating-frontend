@@ -8,11 +8,13 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    background-color: $color1;
+    background-color: rgba(8, 91, 143, 0.6);
+    color: white;
     position: relative;
     -webkit-box-shadow: 1px 3px 10px 2px #8B8B8B; 
 box-shadow: 1px 3px 10px 2px #8B8B8B;
 border-radius: 10px;
+
 
     @include breakpoint($sm) {
         height: 80vh;
@@ -43,7 +45,6 @@ border-radius: 10px;
             height: 50px;
             transition: all 300ms ease;
             &:hover {
-                background-color: white;
             color: $color1;
             }
 

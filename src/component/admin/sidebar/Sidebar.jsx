@@ -60,8 +60,10 @@ const Sidebar = () => {
 
                     </li>
                     <li>
-                        <QueryStatsIcon className='icon' />
-                        <span>STATS</span>
+                            <Link to="/admin/questions">
+                            <QueryStatsIcon className='icon' />
+                            <span>QUESTION</span>
+                            </Link>                     
                     </li>
                     <p className='title'>USER</p>
 

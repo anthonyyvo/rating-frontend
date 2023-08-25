@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { LangContext } from '../../context/languageContext/langContext';
 import './widgetItem.scss'
+import { CurrentContext } from '../../context/currentContext/currentContext';
 
-function WidgetItem({handlePosition, position , current, child, haveButton=true}) {
+function WidgetItem({position , child, haveButton=true}) {
     const [currentPosition, setCurrentPosition] = useState('');
     const {langs} = useContext(LangContext);
+    const {current, dispatch: currentDispatch} = useContext(CurrentContext);
 
     useEffect(()=> {
-        if (current === position) {
+        if (current.currentItem === position) {
             setCurrentPosition('center');
-        } else if (current < position || parseInt(current - position) > 1) {
+        } else if (current.currentItem < position || parseInt(current.currentItem - position) > 1) {
             setCurrentPosition('right');
         } else {
             setCurrentPosition('left');
@@ -22,15 +24,15 @@ function WidgetItem({handlePosition, position , current, child, haveButton=true}
     <div className='main'>
     {child}
     </div>
-    <div className='footer'>
-    {
+    <div className='footer '>
+    {/* {
         haveButton && (
             <button className='nextButton' onClick={(e)=> {
                 if (position === 3) {
                     console.log('send data')
                 }
-                handlePosition(position)
-                }}>{
+                currentDispatch({type: "FORWARD"});
+            }}>{
         langs.lang==="eng" && "NEXT"
     }
     {
@@ -38,7 +40,7 @@ function WidgetItem({handlePosition, position , current, child, haveButton=true}
     }
     </button>
         )
-    }
+    } */}
     
     </div>
     </div>

@@ -1,0 +1,13 @@
+.questions {
+    display: flex;
+}
+.questionsContainer {
+    // background-color: aqua;
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    .tableWrapper {
+        margin: 20px;
+    }
+    
+   }

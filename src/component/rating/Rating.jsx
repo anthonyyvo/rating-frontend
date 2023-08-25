@@ -9,9 +9,10 @@ import { LoginContext } from '../../context/loginContext/Context';
 import LoadingSpinner from '../spinner/LoadingSpinner';
 import { SendDataContext } from '../../context/sendDataContext/SendDataContext';
 import { fabClasses } from '@mui/material';
+import { CurrentContext } from '../../context/currentContext/currentContext';
 
 
-const Rating = ({ position, handlePosition }) => {
+const Rating = ({ position }) => {
   const [rateScore, setRateScore] = useState(0);
   const [hover, setHover] = useState(0);
   const { dispatch } = useContext(DataContext);
@@ -21,6 +22,8 @@ const Rating = ({ position, handlePosition }) => {
   const [isSpinner, setIsSpinner] = useState(false);
   const [success, setSuccess] = useState(false);
   const {handleSendData, messenger} = useContext(SendDataContext);
+  const {current, dispatch: currentDispatch} = useContext(CurrentContext);
+
 
   const handleRating = async (score) => {
     if (score === rateScore) {
@@ -31,19 +34,26 @@ const Rating = ({ position, handlePosition }) => {
       })
       setHover(0)
     } else {
+    
       setRateScore(score)
       dispatch({
         type: DataContextActions.RATING,
         payload: score
       });
-      const newRating = {
-        ...state,
-        answer: state.question,
-        username: user?.username,
-        rating: score,
-        phone: null
-      };
-      handleSendData(newRating);
+      if (score > 3) {
+        const newRating = {
+          ...state,
+          answer: state.question,
+          username: user?.username,
+          rating: score,
+          phone: null
+        };
+        handleSendData(newRating);
+      } else {
+        currentDispatch({type: "SET_CURRENT", payload: position});
+
+      }
+      
     }
   }
   const handleHover = (score) => {
@@ -51,7 +61,10 @@ const Rating = ({ position, handlePosition }) => {
   }
   useEffect(()=> {
     if (messenger === "success") {
-      handlePosition(position)
+        if (rateScore > 3) {
+          currentDispatch({type: "BYPASS", payload: position});
+
+        }
     };
     if (messenger === "loading") {
       setIsSpinner(true)
@@ -78,7 +91,7 @@ const Rating = ({ position, handlePosition }) => {
           onMouseLeave={() => handleHover(rateScore)}
         />
         <StarRateIcon
-          onClick={() => { handleRating(3) }}
+          // onClick={() => { handleRating(3) }}
           className={`icon ${rateScore > 2 ? 'active' : ''} ${hover > 2 ? 'hover' : ''}`}
           style={{ fontSize: 60 }}
           onMouseEnter={() => handleHover(3)}

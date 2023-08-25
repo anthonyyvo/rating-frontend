@@ -3,60 +3,107 @@ import { DataContext, DataDispatchContext } from '../../context/dataContext/data
 import { dataContextReducer } from '../../context/dataContext/dataContextReducer';
 import { LangContext } from '../../context/languageContext/langContext';
 import './question.scss';
-const jobs = ['Receptionist', 'Assistant', 'Doctor', 'Security' , 'Customer Service'];
-const jobsVi = ['Lễ Tân' , 'Phụ Tá', 'Bác Sĩ', 'Bảo Vệ', 'CSKH'];
-function Question({ position, handlePosition }) {
+import { CurrentContext } from '../../context/currentContext/currentContext';
+import { SendDataContext } from '../../context/sendDataContext/SendDataContext';
+import { LoginContext } from '../../context/loginContext/Context';
+import LoadingSpinner from '../spinner/LoadingSpinner';
+import { QuestionsContext } from '../../context/questionsContext/Context';
+
+
+function Question({ position, haveButton=true }) {
   const { dispatch } = useContext(DataContext);
   const { state } = useContext(DataContext)
   const { langs } = useContext(LangContext);
-  const inputRef = useRef();
-  
-  const [checked, setChecked] = useState(new Array(jobs.length).fill(false));
-  const [jobsTitle, setJobsTitle] = useState(jobs) ;
+  const {current, dispatch: currentDispatch} = useContext(CurrentContext);
+  const {handleSendData, messenger} = useContext(SendDataContext);
+  const [isSpinner, setIsSpinner] = useState(false);
+  const {state: questionsState } = useContext(QuestionsContext);
 
-  const handleChecked = (position) => {
-    const updateChecked = checked.map((check, index) => 
-    index === position ? !check : check
-    )
-    setChecked(updateChecked);
-    dispatch({type: 'POSITION', payload: checked});
+  const inputRef = useRef();
+  const { user } = useContext(LoginContext);
+
+
+  const handleSendRating = async () => {
+    console.log(inputRef.current.value);
+    const answer = inputRef.current.value;
+    const newRating = {
+            ...state,
+            answer: answer,
+            username: user?.username,
+            phone: null
+          };
+    handleSendData(newRating);
+        console.log(state)
+    
   }
 
-  useEffect(() => {
-    if (langs.lang === 'vi') {
-      setJobsTitle(jobsVi)
-    } else if (langs.lang === 'eng') {
-      setJobsTitle(jobs)
-    }
-    dispatch({type: 'POSITION', payload: checked});
-  }, [checked, langs])
+  
+  useEffect(()=> {
+    if (messenger === "success") {
+        if (true) {
+          currentDispatch({type: "FORWARD", payload: position});
+
+        }
+    };
+    if (messenger === "loading") {
+      setIsSpinner(true)
+    } else {
+      setIsSpinner(false)
+    };
+  },[messenger])
   return (
     <div className='question'>
       <div className='header'>
         <h2>
-          {
-            langs.lang === "eng" && "What changes would EDEN have to make for you to give it a higher rating?"
+          {langs.lang === "vi" ? questionsState.questions?.question2?.question : questionsState.questions?.question2.questionEng}
+          {/* {
+            langs.lang === "eng" && "What can EDEN do to better serve your needs?"
           }
-          {langs.lang === "vi" && "Bạn thấy EDEN cần thay đổi gì để bạn đánh giá cao hơn?"}
+          {langs.lang === "vi" && "EDEN có thể làm gì để phục vụ tốt hơn cho bạn?"} */}
+
         </h2>
       </div>
       <div className='body'>
-        <div className='checkBoxWrap'>
-          {jobsTitle.map((job, index) => (
-            <div key={index} className='checkItem'>
-            <input type="checkbox" value={job} name={job} onChange={()=>handleChecked(index)} />
-            <label htmlFor={job}>{job}</label>
-            </div>
-          ))}
-        </div>
+
         <textarea ref={inputRef} id="answerText" placeholder={langs.lang === 'eng' ? "Feedback..." : "Góp ý..."} onChange={(e) => dispatch({ type: 'QUESTION', payload: e.target.value })}
           onKeyUp={e => {
             if (e.key === "Enter") {
-              handlePosition(position);
+              handleSendRating();
               inputRef.current.blur()
             }
           }}
         ></textarea>
+        <h2 className="py-2">
+          {langs.lang === "vi" ? 
+          "Bạn có thể chia sẻ thêm hoặc bấm " :
+          "You can share more or click "
+          }
+          &darr;
+          </h2>
+        {
+        haveButton && (
+            <button className='nextButton bg-blue-800'
+            onClick={()=> {
+             handleSendRating()
+            }}
+            >{
+        langs.lang==="eng" && "FINISH"
+    }
+    {
+        langs.lang==="vi" && "HOÀN THÀNH Đánh Giá"
+    }
+    </button>
+        )
+    }
+
+    {
+      messenger === "error" ? 
+      (
+        <p>LOI GOI DANH GIA</p>
+
+      ) :
+      ""
+    }
       </div>
     </div>
   )

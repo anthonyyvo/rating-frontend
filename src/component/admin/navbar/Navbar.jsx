@@ -25,7 +25,7 @@ const Navbar = () => {
           </div> */}
           <div className='item'>
             <SettingsIcon className='icon' />
-            Settings
+            Setting
           </div>
           <div className='item'>
             <Link to="/admin/profile">
