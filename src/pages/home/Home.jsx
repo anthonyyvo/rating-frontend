@@ -7,6 +7,9 @@ import { LangContext } from '../../context/languageContext/langContext';
 import { DataContext } from '../../context/dataContext/dataContext';
 import { DataContextActions } from '../../context/dataContext/dataContextActions';
 import { LoginContext } from '../../context/loginContext/Context';
+import { CurrentContext } from '../../context/currentContext/currentContext';
+import bg from '../../images/bg4.jpg';
+import { QuestionsContext } from '../../context/questionsContext/Context';
 
 function Home() {
   const { langs } = useContext(LangContext);
@@ -14,8 +17,18 @@ function Home() {
   const {state, dispatch: dispatchData} = useContext(DataContext)
   const [location, setLocation] = useState(state.location)
   const [menu, setMenu] = useState(false)
-  useEffect(() => {
+  const {current} = useContext(CurrentContext);
+  const {state: questionsState, dispatch: questionsDispatch, handleSendData} = useContext(QuestionsContext)
 
+  // FETCH DATA OF QUESTION
+  useEffect(() => {
+    const data = {
+      name: "satisfied"
+    }
+    const questions = async (data) => {
+      await handleSendData(data);
+    }
+    questions(data);
   }, [])
   const handleLocation = (loc) => {
     setLocation(loc);
@@ -26,12 +39,15 @@ function Home() {
     }, [])
   }
   return (
-    <div className='home'>
+    <div className='home ' style={{
+      background: `url(${bg}) no-repeat center center fixed`,
+      backgroundSize: 'cover'
+      }}>
       <div className={`locationMenu ${menu && 'show'}`}>
         <ArrowDropDownIcon onClick={e=>{setMenu(!menu)}}/>
         <div className='dropWrapper'>
-          <span className={location === 7 && 'active'} onClick={e=>{handleLocation(7)}}>Eden D7</span>
-          <span className={location === 1 && 'active'} onClick={e=>{handleLocation(1)}}>Eden D1</span>
+          <span className={location === 7 ? 'active' : ''} onClick={e=>{handleLocation(7)}}>Eden D7</span>
+          <span className={location === 1 ? 'active' : ''} onClick={e=>{handleLocation(1)}}>Eden D1</span>
         </div>
 
       </div>

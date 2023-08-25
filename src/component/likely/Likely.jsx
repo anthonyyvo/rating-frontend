@@ -3,12 +3,17 @@ import { DataContext } from '../../context/dataContext/dataContext';
 import './likely.scss';
 import { DataContextActions } from '../../context/dataContext/dataContextActions';
 import { LangContext } from '../../context/languageContext/langContext';
+import { CurrentContext } from '../../context/currentContext/currentContext';
+import { QuestionsContext } from '../../context/questionsContext/Context';
 
 
-function Likely({position, handlePosition}) {
+function Likely({position}) {
     const {dispatch, state} =  useContext(DataContext);
     const [score, setScore] = useState(null);
     const {langs} = useContext(LangContext);
+    const {current, dispatch: currentDispatch} = useContext(CurrentContext);
+    const {state: questionsState } = useContext(QuestionsContext);
+
     useEffect(()=> {
         setScore(state.likely)
     },[state])
@@ -21,7 +26,7 @@ function Likely({position, handlePosition}) {
             })
         } else {
             setScore(num);
-            handlePosition(position);
+            currentDispatch({type: "SET_CURRENT", payload: position});
             dispatch({
                 type: DataContextActions.LIKELY,
                 payload: num
@@ -32,8 +37,9 @@ function Likely({position, handlePosition}) {
 <div className='likely'>
         <div className='header'>
             <h2>
-            {langs.lang==="eng" && "How likely is it that you would recommend EDEN clinic to a friend or colleague?"}
-            {langs.lang==="vi" && "Bạn có sẵn lòng giới thiệu Eden cho bạn bè hoặc đồng nghiệp?"}
+                {langs.lang === "vi" ? questionsState.questions?.likely?.question : questionsState.questions?.likely?.questionEng}
+            {/* {langs.lang==="eng" && "How likely is it that you would recommend EDEN clinic to a friend or colleague?"}
+            {langs.lang==="vi" && "Bạn có sẵn lòng giới thiệu Eden cho bạn bè hoặc đồng nghiệp?"} */}
 
             </h2>
         </div>
