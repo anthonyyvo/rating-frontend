@@ -4,8 +4,9 @@ export const INITIAL_STATE = {
     question: '',
     likely: null,
     rating: null,
-    location: 1,
-    position: null
+    position: null,
+    location: JSON.parse(localStorage.getItem("location")) || 1
+
 }
 export const  dataContextReducer = function(state, action) {
     switch (action.type) {

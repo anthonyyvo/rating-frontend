@@ -62,7 +62,11 @@ useEffect(()=> {
   return (
     <div className="flex flex-col gap-4 px-4">
       <h2 className="text-xl font-bold mb-4">
-      {langs.lang === "eng" ? questionsState.questions?.question1?.questionEng : questionsState.questions?.question1?.question}
+      {/* {langs.lang === "eng" ? questionsState.questions?.question1?.questionEng : questionsState.questions?.question1?.question} */}
+      {questionsState.questions?.question1 ? '' : ( langs.lang==="vi" ? "Bạn có sẵn lòng giới thiệu Eden cho bạn bè hoặc đồng nghiệp?" : "How likely is it that you would recommend EDEN clinic to a friend or colleague?")}
+
+            {langs.lang==="eng" && (questionsState.questions?.question1?.questionEng)}
+            {langs.lang==="vi" && (questionsState.questions?.question1?.question)}
       </h2>
       {/* SELECT SECTION */}
 

@@ -24,7 +24,6 @@ function Question({ position, haveButton=true }) {
 
 
   const handleSendRating = async () => {
-    console.log(inputRef.current.value);
     const answer = inputRef.current.value;
     const newRating = {
             ...state,
@@ -32,9 +31,7 @@ function Question({ position, haveButton=true }) {
             username: user?.username,
             phone: null
           };
-    handleSendData(newRating);
-        console.log(state)
-    
+    handleSendData(newRating);    
   }
 
   
@@ -55,12 +52,15 @@ function Question({ position, haveButton=true }) {
     <div className='question'>
       <div className='header'>
         <h2>
-          {langs.lang === "vi" ? questionsState.questions?.question2?.question : questionsState.questions?.question2.questionEng}
+          {/* {langs.lang === "vi" ? questionsState.questions?.question2?.question : questionsState.questions?.question2.questionEng} */}
           {/* {
             langs.lang === "eng" && "What can EDEN do to better serve your needs?"
           }
           {langs.lang === "vi" && "EDEN có thể làm gì để phục vụ tốt hơn cho bạn?"} */}
+          {questionsState.questions?.question2 ? '' : ( langs.lang==="vi" ? "EDEN có thể làm gì để phục vụ tốt hơn cho bạn?" : "What can EDEN do to better serve your needs?")}
 
+            {langs.lang==="eng" && (questionsState.questions?.question2?.questionEng)}
+            {langs.lang==="vi" && (questionsState.questions?.question2?.question)}
         </h2>
       </div>
       <div className='body'>
