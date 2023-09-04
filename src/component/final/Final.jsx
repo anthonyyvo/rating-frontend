@@ -14,7 +14,7 @@ function Final() {
   const {messenger} = useContext(SendDataContext);
 
 useEffect(()=> {
- if (state.satisfied > 1) {
+ if (state.satisfied > 2 && state.likely > 8) {
   setShowQR(true);
  };
 }, [state])
