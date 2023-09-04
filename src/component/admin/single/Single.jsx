@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Routes, Route, useParams } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import Sidebar from '../sidebar/Sidebar';
 import './single.scss';
 import axios from 'axios';
 import LoadingSpinner from '../../spinner/LoadingSpinner';
+import { LoginContext } from '../../../context/loginContext/Context';
 function Single() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState();
@@ -14,9 +15,12 @@ function Single() {
     const [isSpinner, setIsSpinner] = useState(false);
     const [success, setSuccess] = useState();
     const [err, setErr] = useState();
+    const {user} = useContext(LoginContext);
+
 
 
     useEffect(() => {
+        console.log(user);
         const url = `${process.env.REACT_APP_SERVER}/rating/` + userId;
         axios.get(url)
             .then((res) => {
@@ -37,7 +41,24 @@ function Single() {
             setIsSpinner(false);
             setSuccess('Update Successful')
         } catch (err) {
-
+            console.log(err)
+        }
+       
+    }
+    const handleDelete = async () => {
+        try {
+            const urlUpdate =  process.env.REACT_APP_SERVER + "/rating/" + userId;
+            setIsSpinner(true);
+            const res =  await axios.delete(urlUpdate, {
+                data: {
+                    ...user
+                }
+            });
+            console.log(res);
+            setIsSpinner(false);
+            setSuccess('Delete Successful')
+        } catch (err) {
+            console.log(err)
         }
        
     }
@@ -93,6 +114,11 @@ function Single() {
                         <button className='updateButton' onClick={()=> {handleUpdate()}}>
                         Update 
                         </button>
+                        { user.isAdmin ? 
+                            <button className='delButton' onClick={()=> {handleDelete()}}>
+                            Delete 
+                            </button> : ''
+                        }
                     </div>
                     
                 </div>

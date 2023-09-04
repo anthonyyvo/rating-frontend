@@ -21,7 +21,7 @@ function Admin() {
         </div>
 
         <div className='chartContainer'>
-              <Chart location={1} info="rating" />
+              <Chart location={1} info="satisfied" />
               <Chart location={7} info="satisfied" />
             
         </div>

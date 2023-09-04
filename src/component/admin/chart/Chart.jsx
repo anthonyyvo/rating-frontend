@@ -43,22 +43,25 @@ export const PieChartIndex = ({ colors, index, name }) => {
 
 const Chart = ({ location, info }) => {
   const [dataChart, setDataChart] = useState(data2);
-
+  if (location === 1) {
+    console.log('1')
+  }
   useEffect(() => {
     const urlRes = `${process.env.REACT_APP_SERVER}/rating`;
     axios.get(urlRes)
       .then(res => {
         const dataFinal = res.data;
+        console.log(dataFinal);
         let finalDataChart = [
           { name: "1", value: 0 },
           { name: "2", value: 0 },
           { name: "3", value: 0 },
           { name: "4", value: 0 },
-          { name: "5", value: 0 },
+
         ]
         finalDataChart.map((e, i) => {
           let countRate = dataFinal.reduce((acc, current, index) => {
-            if (current[info] === i + 1) {
+            if (current[info] === i +1 && current.location === location ) {
               acc++
             }
             return acc;
@@ -67,6 +70,7 @@ const Chart = ({ location, info }) => {
 
         })
         setDataChart(finalDataChart);
+        console.log(finalDataChart)
       })
 
   }, [])
@@ -97,7 +101,7 @@ const Chart = ({ location, info }) => {
 
           ) : ''}
       </div>
-      <p className='chartIndexTitle'>{info}</p>
+      <p className='chartIndexTitle'>ĐÁNH GIÁ QUẬN {location}</p>
       <ul className='chartIndex'>
         {dataChart.map((e,i) => 
         (

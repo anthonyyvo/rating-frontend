@@ -37,7 +37,10 @@ function Likely({position}) {
 <div className='likely'>
         <div className='header'>
             <h2>
-                {langs.lang === "vi" ? questionsState.questions?.likely?.question : questionsState.questions?.likely?.questionEng}
+            {questionsState.questions?.likely ? '' : ( langs.lang==="vi" ? "Bạn có sẵn lòng giới thiệu Eden cho bạn bè hoặc đồng nghiệp?" : "How likely is it that you would recommend EDEN clinic to a friend or colleague?")}
+
+            {langs.lang==="eng" && (questionsState.questions?.likely?.questionEng)}
+            {langs.lang==="vi" && (questionsState.questions?.likely?.question)}
             {/* {langs.lang==="eng" && "How likely is it that you would recommend EDEN clinic to a friend or colleague?"}
             {langs.lang==="vi" && "Bạn có sẵn lòng giới thiệu Eden cho bạn bè hoặc đồng nghiệp?"} */}
 
