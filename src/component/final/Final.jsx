@@ -14,7 +14,7 @@ function Final() {
   const {messenger} = useContext(SendDataContext);
 
 useEffect(()=> {
- if (state.satisfied > 1) {
+ if (state.satisfied > 2 && state.likely > 8) {
   setShowQR(true);
  };
 }, [state])
@@ -34,7 +34,7 @@ useEffect(()=> {
         <p className='title'>
         
         {langs.lang==="eng" && "Can you share it to Google to help the community find the right place?"}
-            {langs.lang==="vi" && "Bạn có thể vui lòng chia sẻ đánh giá này lên Google để giúp cộng đồng và Eden không?"}
+            {langs.lang==="vi" && "Bạn có thể vui lòng chia sẻ đánh giá này lên Google để giúp cộng đồng không?"}
         </p>
             <img src={state.location === 1 ? qrd1 : qrd7} />
         </div>
