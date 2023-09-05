@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import Sidebar from '../sidebar/Sidebar';
 import './single.scss';
@@ -20,7 +20,6 @@ function Single() {
 
 
     useEffect(() => {
-        console.log(user);
         const url = `${process.env.REACT_APP_SERVER}/rating/` + userId;
         axios.get(url)
             .then((res) => {
@@ -54,7 +53,6 @@ function Single() {
                     ...user
                 }
             });
-            console.log(res);
             setIsSpinner(false);
             setSuccess('Delete Successful')
         } catch (err) {

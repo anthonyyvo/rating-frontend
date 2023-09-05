@@ -4,6 +4,7 @@ import Navbar from '../navbar/Navbar';
 import axios from 'axios';
 import './questions.scss'
 import { QuestionsContext } from '../../../context/questionsContext/Context';
+import { LoginContext } from '../../../context/loginContext/Context';
 const Questions = () => {
     const [quesActive, setQuesActive] = useState(1);
     const {state, dispatch, handleSendData} = useContext(QuestionsContext);
@@ -12,9 +13,8 @@ const Questions = () => {
     // Options if question have
     const [options, setOptions] = useState([])
     const [engOptions, setEngOptions] = useState([]);
-    // const PF =  "http://localhost:3001/api/questions/";
     const PF = process.env.REACT_APP_SERVER + "/questions/";
-
+    const {user} = useContext(LoginContext);
     const [isNew, setIsNew] = useState(false)
 
     // Make new array as options & Eng options when change any input value
@@ -40,7 +40,7 @@ const Questions = () => {
         try {
             const deleted = await axios.delete(PF + id,{
                 data: {
-                    username: "admin"
+                    username: user.username
                 }
             });
             console.log(deleted);
@@ -56,7 +56,7 @@ const Questions = () => {
             try {
                 const postQuestion = await axios.post(PF, {
                     ...newQuestion,
-                    username: "admin"
+                    username: user.username
                 });
                 console.log(postQuestion)
             } catch (err) {
@@ -66,11 +66,10 @@ const Questions = () => {
         } else {
             const updateQuestion = {...currentQues, options: options, optionsEng: engOptions};
     
-            console.log(updateQuestion)
             try {
                 await axios.put(PF + updateQuestion._id, {
                     ...updateQuestion,
-                    username: "admin"
+                    username: user.username
                 })
             } catch (err) {
                 console.log(err)
