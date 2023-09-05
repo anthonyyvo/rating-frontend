@@ -8,25 +8,30 @@ import LoadingSpinner from '../../spinner/LoadingSpinner';
 import { LoginContext } from '../../../context/loginContext/Context';
 function Single() {
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState();
+    const [phone, setPhone] = useState('');
     const [comments, setComments] = useState('');
-    const [rating, setRating] = useState();
+    const [rating, setRating] = useState(null);
     let { userId } = useParams();
     const [isSpinner, setIsSpinner] = useState(false);
-    const [success, setSuccess] = useState();
+    const [success, setSuccess] = useState(false);
     const [err, setErr] = useState();
     const {user} = useContext(LoginContext);
 
 
 
     useEffect(() => {
-        const url = `${process.env.REACT_APP_SERVER}/rating/` + userId;
-        axios.get(url)
-            .then((res) => {
-                setRating(res.data);
-                setName(res.data.name);
-                setPhone(res.data.phone);
-            })
+        const getInfo = async () => {
+            const url = `${process.env.REACT_APP_SERVER}/rating/` + userId;
+            axios.get(url)
+                .then((res) => {
+                    setRating(res.data);
+                    setName(res.data.name);
+                    setPhone(res.data.phone);
+                    setComments(res.data.comments)
+                })
+        }
+        getInfo();
+        
     }, []);
     const handleUpdate = async () => {
         try {
@@ -34,6 +39,7 @@ function Single() {
             setIsSpinner(true);
             const res =  await axios.put(urlUpdate, {
                 ...rating,
+                comments: comments,
                 name: name,
                 phone: phone
             });
