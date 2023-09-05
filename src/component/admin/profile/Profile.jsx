@@ -11,7 +11,6 @@ function Profile() {
     const [displayName, setDisplayName] = useState(user.displayName);
     const PF =  "http://localhost:5000/images/";
     useEffect(() => {
-        console.log(user);
     }, []);
 
     const handleSubmit = async (e) => {
@@ -35,7 +34,6 @@ function Profile() {
         }
         try {
             const res = await axios.put(process.env.REACT_APP_SERVER + "/users/" + user._id, updateUser);
-            console.log(res);
             dispatch({type: "LOGIN_SUCCESS", payload: res.data});
         } catch (err) {            
             console.log(err)

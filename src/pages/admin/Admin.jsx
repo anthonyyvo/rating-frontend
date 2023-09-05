@@ -1,32 +1,29 @@
-import React from 'react';
-import './admin.scss';
-import Sidebar from '../../component/admin/sidebar/Sidebar';
-import Navbar from '../../component/admin/navbar/Navbar';
-import Widget from '../../component/admin/widget/Widget';
-import Chart from '../../component/admin/chart/Chart';
+import React from "react";
+import "./admin.scss";
+import Sidebar from "../../component/admin/sidebar/Sidebar";
+import Navbar from "../../component/admin/navbar/Navbar";
+import Widget from "../../component/admin/widget/Widget";
+import Chart from "../../component/admin/chart/Chart";
 
 function Admin() {
   return (
-    <div className='admin'>
+    <div className="admin">
       <Sidebar />
-      <div className='homeContainer'>
+      <div className="homeContainer">
         <Navbar />
-        <div className='adminWidgets'>
-          <Widget type='location-1'/>
-          <Widget type='location-7' />
+        <div className="adminWidgets">
+          <Widget type="location-1" />
+          <Widget type="location-7" />
           <Widget />
-
-
-
         </div>
 
-        <div className='chartContainer'>
-              <Chart location={1} info="satisfied" />
-              <Chart location={7} info="satisfied" />
-            
+        <div className="chartContainer">
+          <Chart location={1} info="satisfied" />
+          <Chart location={7} info="satisfied" />
         </div>
       </div>
-    </div>)
+    </div>
+  );
 }
 
-export default Admin
+export default Admin;
